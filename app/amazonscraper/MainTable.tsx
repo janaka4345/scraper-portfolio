@@ -1,15 +1,20 @@
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { getDataFilesLIst } from "@/serverActions/amazonscraper";
 import { DataFileListItem, JobLIst } from "@/type";
-import Link from "next/link";
+import CancelJob from "./_components/CancelJob";
 import DetailModal from "./_components/DetailModal";
+import DownloadData from "./_components/DownloadData";
 
 export default async function MainTable({ status, data }: { status: string, data: JobLIst[] }) {
     const files = await getDataFilesLIst()
 
     return (
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                {status === 'pending' && <span>Pending Jobs</span>}
+                {status === 'running' && <span>Running Jobs</span>}
+                {status === 'finished' && <span> Finished Jobs</span>}
+
+            </caption>
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" className="px-6 py-3">
@@ -36,17 +41,21 @@ export default async function MainTable({ status, data }: { status: string, data
                             {getFile(job.id, files!)?.keyword}
                         </th>
                         <td className="px-6 py-4">
-                            {job.start_time}
+                            {new Date(job.start_time).toLocaleTimeString()}{' '}{new Date(job.start_time).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4">
                             {status}
                         </td>
                         <td className="px-6 py-4">
-                            {job.end_time}
+                            {status === 'finished' && new Date(job.end_time).toLocaleTimeString()}{' '}{new Date(job.end_time).toLocaleDateString()}
+
                         </td>
-                        {status === 'finished' && <td className="px-6 py-4 text-right">
+
+                        {status === 'finished' ? <td className="px-6 py-4 text-right">
                             <DetailModal file={getFile(job.id, files!)} />
-                            <Link href='/' className={cn(buttonVariants({ variant: 'default' }), "font-medium")}>Download File</Link>
+                            <DownloadData file={getFile(job.id, files!)} />
+                        </td> : <td className="px-6 py-4 text-right">
+                            <CancelJob jobid={job.id} />
                         </td>}
                     </tr>
                 ))}
@@ -56,7 +65,5 @@ export default async function MainTable({ status, data }: { status: string, data
 }
 function getFile(jobid: string, files: DataFileListItem[]): DataFileListItem | undefined {
     const file = files?.find(file => file.jobid === jobid)
-    console.log(file);
-
     return file
 }
