@@ -91,3 +91,26 @@ export async function scrapeData(keyword: string) {
         return { data: { data: 'need credentials' } }
     }
 }
+
+export async function cancelJob(jobid: string) {
+    // curl http://localhost:6800/cancel.json -d project=myproject -d job=6487ec79947edab326d6db28a2d86511e8247444
+    const data = new URLSearchParams()
+    data.append('job', `${jobid}`)
+    data.append('project', 'amazonscraper')
+
+    try {
+        await axios.post(`${SCRAPER_SERVER}/cancel.json`, data, {
+            auth: {
+                username: process.env.USER_NAME!,
+                password: process.env.PASSWORD!,
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+        return null
+    } catch (error) {
+        console.log(error)
+        return { data: { data: 'need credentials' } }
+    }
+}
