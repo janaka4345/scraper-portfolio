@@ -1,32 +1,21 @@
 import Link from "next/link";
+import ServiceCard from "./ServiceCard";
 
 export default function Services() {
+    const headingData = [
+        ['Web Scraping on the cloud', 'Web Scraping with portable application'],
+        ['Static websites scraping', 'Dynamic websites scraping'],
+        ['Cleaning up data', 'Data formatting and conversion as required'],
+        ['Save data to a SQL /noSQL databases', 'Download data file as .json, .csv, etc.'],
+        ['Scraping images with texts and extract only texts', 'Scraping video files and save locally or upload to cloud'],
+        ['Periodically scheduled scraping', 'Scraping without getting banned']
+
+    ]
     return (
-        <section id='services' className="w-[100svw] h-[90svh] grid grid-cols-3 grid-rows-2 bg-white gap-2 px-20  py-4 ">
-            <div className="bg-red-500">
-                <h1>Web Scraping on the cloud</h1>
-                <h1>Web Scraping with portable application</h1>
-            </div>
-            <div className="bg-red-500">
-                <h1>static web scraping</h1>
-                <h1>Dynamic web scraping</h1>
-            </div>
-            <div className="bg-red-500">
-                <h1>Cleaning up data</h1>
-                <h1>Data formatting and conversion to requirements </h1>
-            </div>
-            <div className="bg-red-500">
-                <h1>Save data to a sql /noSQL database</h1>
-                <h1>Download data file as json, csv, etc.</h1>
-            </div>
-            <div className="bg-red-500">
-                <h1>Scraping images with text and extract texts </h1>
-                <h1>Scraping video files and save locally or upload to cloud  </h1>
-            </div>
-            <div className="bg-red-500">
-                <h1>scheduled scraping </h1>
-                <h1>Scraping without getting banned </h1>
-            </div>
+        <section id='services' className="w-full px-10 relative h-[100svh] bg-[url('/data-pipeline-architecture.jpg')]  grid grid-cols-3 grid-rows-2  gap-2 pt-[10svh] pb-[5svh]">
+            {headingData.map((heading, i) => (
+                <ServiceCard key={i} headings={heading} />
+            ))}
         </section>
     )
 }
