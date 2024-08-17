@@ -9,10 +9,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { getDataFile } from "@/serverActions/amazonscraper";
 import { DataFileListItem } from "@/type";
+import DownloadData from "./DownloadData";
 
 export default async function DetailModal({ file }: { file: DataFileListItem | undefined }) {
     if (!file) {
@@ -35,8 +34,8 @@ export default async function DetailModal({ file }: { file: DataFileListItem | u
                     <pre>{JSON.stringify(fileData, null, 2)}</pre>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Download File</Button>
-                    <Button type="submit">Delete File</Button>
+                    <DownloadData file={file} />
+                    <Button disabled={true} type="submit">Delete File</Button>
                 </DialogFooter>
             </DialogContent >
         </Dialog >
