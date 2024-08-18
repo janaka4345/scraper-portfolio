@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 
 import axios from 'axios'
 import { DataError, DataFile, DataFileListItem } from '@/type'
-const SCRAPER_SERVER = process.env.WALMART_SCRAPER_SCRAPER_SERVER
+const SCRAPER_SERVER = process.env.WALMART_SCRAPER_SERVER
 export async function getDataFilesLIst() {
     try {
         const response = await axios.get(`${SCRAPER_SERVER}/data`, {
@@ -33,14 +33,16 @@ export async function getDataFilesLIst() {
 export async function getJobList() {
     try {
         const response = await axios.get(
-            `${SCRAPER_SERVER}/listjobs.json?project=walmartspider`,
+            `${SCRAPER_SERVER}/listjobs.json?project=walmartscraper`,
             {
                 auth: {
-                    username: process.env.USER_NAME!,
-                    password: process.env.PASSWORD!,
+                    username: process.env.WALMART_SCRAPER_USER_NAME!,
+                    password: process.env.WALMART_SCRAPER_PASSWORD!,
                 },
             }
         )
+        // console.log(response.data)
+        // response
         return response
     } catch (error) {
         console.log(error)
