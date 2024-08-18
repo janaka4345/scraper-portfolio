@@ -1,21 +1,22 @@
 import { getDataFilesLIst } from "@/serverActions/amazonscraper";
 import { DataFileListItem, JobLIst } from "@/type";
-import CancelJob from "./_components/CancelJob";
-import DetailModal from "./_components/DetailModal";
-import DownloadData from "./_components/DownloadData";
+import CancelJob from "./CancelJob";
+import DetailModal from "./DetailModal";
+import DownloadData from "./DownloadData";
 
 export default async function MainTable({ status, data }: { status: string, data: JobLIst[] }) {
     const files = await getDataFilesLIst()
 
+
     return (
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+        <table className="w-full border-2  text-sm text-left rtl:text-right text-gray-500 ">
+            <caption className="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-gray-200  ">
                 {status === 'pending' && <span>Pending Jobs</span>}
                 {status === 'running' && <span>Running Jobs</span>}
                 {status === 'finished' && <span> Finished Jobs</span>}
 
             </caption>
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
                 <tr>
                     <th scope="col" className="px-6 py-3">
                         Product Scraped
@@ -36,8 +37,8 @@ export default async function MainTable({ status, data }: { status: string, data
             </thead>
             <tbody>
                 {data.reverse().map((job, i) => (
-                    <tr key={job.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <tr key={job.id} className="bg-white border-b   hover:bg-gray-50 ">
+                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {getFile(job.id, files!)?.keyword}
                         </th>
                         <td className="px-6 py-4">
