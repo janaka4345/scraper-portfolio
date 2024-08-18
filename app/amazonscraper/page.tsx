@@ -1,8 +1,8 @@
 import { getJobList } from "@/serverActions/amazonscraper"
 import { JobLIst } from "@/type"
 import { revalidatePath } from "next/cache"
-import ScrapeJobForm from "./_components/ScrapeJobForm"
-import MainTable from "./MainTable"
+import ScrapeJobForm from "../_components/ScrapeJobForm"
+import MainTable from "../_components/MainTable"
 
 export const revalidate = 10
 export default async function page() {
@@ -18,18 +18,18 @@ export default async function page() {
             <h1 className=" text-3xl text-gray-700 font-bold tracking-tight w-fit mx-auto mt-4 ">Scrape the Amazon.com</h1>
             <ScrapeJobForm />
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
-                <MainTable data={pendingJobs} status='pending' />
-            </div>
+            {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10"> */}
+            <MainTable data={pendingJobs} status='pending' />
+            {/* </div> */}
 
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
-                <MainTable data={runningJobs} status='running' />
-            </div>
+            {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10"> */}
+            <MainTable data={runningJobs} status='running' />
+            {/* </div> */}
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
-                <MainTable data={finishedJobs} status='finished' />
-            </div>
+            {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-10"> */}
+            <MainTable data={finishedJobs} status='finished' />
+            {/* </div> */}
 
         </section>
     )
