@@ -14,9 +14,10 @@ export default function draw(
         // console.log(p5.deltaTime)
 
         p5.background(255, 0, 0)
-        bubbles.forEach((element, i) => {
-            drawBubble(p5, element)
+        bubbles.forEach((bubble, i) => {
+            drawBubble(p5, bubble)
         })
+        p5.noLoop()
 
         // x += p5.frameRate / 10000
     }

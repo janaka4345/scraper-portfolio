@@ -9,9 +9,9 @@ export type Bubble = {
 export default function bubblesArray(width: number, height: number) {
     const bubbles: Bubble[] = []
     for (let index = 0; index < 100; index++) {
-        let radius = Math.floor(Math.random() * 30 + 10)
+        let radius = Math.floor(Math.random() * 10 + 10)
         let x = Math.floor(Math.random() * (width - radius))
-        let y = 0
+        let y = Math.floor(Math.random() * (height - radius))
         let speedX = Math.floor(Math.floor(Math.random() * 100))
         let speedY = Math.floor(Math.floor(Math.random() * 100))
         let color = [
