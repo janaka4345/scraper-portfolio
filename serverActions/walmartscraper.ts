@@ -12,6 +12,7 @@ export async function getDataFilesLIst() {
                 password: process.env.WALMART_SCRAPER_PASSWORD!,
             },
         })
+        //@ts-ignore
 
         const newResponse: DataFileListItem[] = response.data.map((item) => {
             const keys = item.name.split('_')

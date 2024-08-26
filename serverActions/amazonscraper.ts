@@ -12,7 +12,7 @@ export async function getDataFilesLIst() {
                 password: process.env.PASSWORD!,
             },
         })
-
+        //@ts-ignore
         const newResponse: DataFileListItem[] = response.data.map((item) => {
             const keys = item.name.split('_')
 
